@@ -11,8 +11,8 @@
           </el-col>
           <el-col :span="6">
             <p></p>
-            <el-button type="text">登录</el-button>
-            <el-button type="text">注册</el-button>
+            <el-button type="text" @click="loginFormVisible = true">登录</el-button>
+            <el-button type="text" @click="addFormVisible = true">注册</el-button>
             <el-button type="text" icon="el-icon-goods">{{goodsCount}}</el-button>
           </el-col>
         </el-row>
@@ -56,7 +56,7 @@
               <el-menu-item index="/list1">鲜花玫瑰</el-menu-item>
               <el-menu-item index="/list2">永生花</el-menu-item>
               <el-menu-item index="/list3">特别定制</el-menu-item>
-              <el-menu-item index="/list4">品牌文化</el-menu-item>
+              <el-menu-item index="/culture">品牌文化</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
@@ -157,6 +157,36 @@
 
       </el-footer>
     </el-container>
+
+    <el-dialog title="用户注册" :visible.sync="addFormVisible" width="30%" center>
+      <el-form :model="userVO" ref="addUserForm" class="demo-form-inline" label-width="100px" style="width: 90%">
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="userVO.name" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="userVO.password" clearable></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="resetForm('addUserForm')">重 置</el-button>
+        <el-button type="info" @click="addUser">提 交</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="用户登录" :visible.sync="loginFormVisible" width="30%" center>
+      <el-form :model="loginVO" ref="loginForm" class="demo-form-inline" label-width="100px" style="width: 90%">
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="loginVO.name" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="loginVO.password" clearable></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="info" @click="addUser">登 录</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -165,7 +195,17 @@
   export default {
     data() {
       return {
-        activeIndex: '1',
+        addFormVisible: false,
+        loginFormVisible: false,
+        userVO: {
+          name: '',
+          password: ''
+        },
+
+        loginVO: {
+          name: '',
+          password: ''
+        },
 
         goodsCount: 3,
 
@@ -205,6 +245,10 @@
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }

@@ -59,7 +59,7 @@
                    :page-size="pageSize"
                    :current-page="currentPage"
                    layout="prev, pager, next, total"
-                   :total="options.length * 4">
+                   :total="total">
     </el-pagination>
 
   </div>
@@ -73,6 +73,8 @@
 
         pageSize: 16,
         currentPage: 1,
+
+        total: 0,
 
         options: [{
           option: [{
@@ -201,6 +203,10 @@
         }]
       };
     },
+
+    created: function() {
+      this.getGoodsCount();
+    },
     methods: {
       handleSelect() {
         alert(123);
@@ -208,6 +214,13 @@
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage;
         console.log(`当前页: ${val}`);
+      },
+      getGoodsCount() {
+        var n = 0;
+        for (let i = 0; i < this.options.length; i++) {
+          n += this.options[i].option.length;
+        }
+        this.total = n;
       }
     }
   }

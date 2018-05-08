@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row style="padding-top: 15px">
-      <el-carousel height="500px">
+      <el-carousel height="680px">
         <el-carousel-item v-for="loop in loops" :key="loop">
           <img :src=loop.image style="height: 100%; width: 100%;">
         </el-carousel-item>
@@ -28,63 +28,22 @@
         <div class="grid-content"></div>
       </el-col>
       <el-col :span="14">
-        <el-tabs :tab-position="tabPosition" style="height: 240px;">
-          <el-tab-pane label="鲜花玫瑰">
-            <el-row :gutter="20" style="padding-top: 10px">
-              <el-col :span="6" v-for="option in options1" :key="option">
+        <el-tabs :tab-position="tabPosition" style="height: auto">
+          <el-tab-pane :label=option.title v-for="option in options" :key="option">
+              <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="6" v-for="o in option.details" :key="o">
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img :src=option.image class="image">
+                  <img :src=o.image class="image">
                   <div style="padding: 10px;">
-                    <span>{{option.name}}</span>
-                    <span><b> {{option.desc}}</b></span>
-                    <span>¥ {{option.price}}</span>
+                    <span>{{o.name}}</span>
+                    <span><b> {{o.desc}}</b></span>
+                    <span>¥ {{o.price}}</span>
                   </div>
                 </el-card>
               </el-col>
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="永生玫瑰">
-            <el-row :gutter="20" style="padding-top: 10px">
-              <el-col :span="6" v-for="option in options2" :key="option">
-                <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img :src=option.image class="image">
-                  <div style="padding: 10px;">
-                    <span>{{option.name}}</span>
-                    <span><b> {{option.desc}}</b></span>
-                    <span>¥ {{option.price}}</span>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="玫瑰珠宝">
-            <el-row :gutter="20" style="padding-top: 10px">
-              <el-col :span="6" v-for="option in options3" :key="option">
-                <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img :src=option.image class="image">
-                  <div style="padding: 10px;">
-                    <span>{{option.name}}</span>
-                    <span><b> {{option.desc}}</b></span>
-                    <span>¥ {{option.price}}</span>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="玫瑰饰品">
-            <el-row :gutter="20" style="padding-top: 10px">
-              <el-col :span="6" v-for="option in options4" :key="option">
-                <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img :src=option.image class="image">
-                  <div style="padding: 10px;">
-                    <span>{{option.name}}</span>
-                    <span><b> {{option.desc}}</b></span>
-                    <span>¥ {{option.price}}</span>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-tab-pane>
+
         </el-tabs>
       </el-col>
       <el-col :span="6">
@@ -132,6 +91,7 @@
     export default {
       data() {
         return {
+          show: true,
           loops: [{
             image: require('../assets/images/loop0.jpg'),
             path: ''
@@ -166,108 +126,114 @@
 
           tabPosition: 'left',
 
-          options1: [{
-            image: require('../assets/images/rose.jpg'),
-            name: '鲜花玫瑰',
-            desc: '真爱',
-            price: '1999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '鲜花玫瑰',
-            desc: '纯情',
-            price: '1999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '鲜花玫瑰',
-            desc: '致美',
-            price: '1999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '鲜花玫瑰',
-            desc: '浓烈',
-            price: '1999.0',
-            path: '/ '
-          }],
-
-          options2: [{
-            image: require('../assets/images/rose.jpg'),
-            name: '永生玫瑰',
-            desc: '完美',
-            price: '2999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '永生玫瑰',
-            desc: '简约',
-            price: '2999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '永生玫瑰',
-            desc: '向往',
-            price: '2999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '永生玫瑰',
-            desc: '永恒',
-            price: '2999.0',
-            path: '/ '
-          }],
-
-          options3: [{
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰珠宝',
-            desc: '意志',
-            price: '3999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰珠宝',
-            desc: '指引',
-            price: '3999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰珠宝',
-            desc: '远方',
-            price: '3999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰珠宝',
-            desc: '诗意',
-            price: '3999.0',
-            path: '/ '
-          }],
-
-          options4: [{
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰饰品',
-            desc: '鲜花玫瑰',
-            price: '4999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰饰品',
-            desc: '鲜花玫瑰',
-            price: '1999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰饰品',
-            desc: '鲜花玫瑰',
-            price: '4999.0',
-            path: '/ '
-          }, {
-            image: require('../assets/images/rose.jpg'),
-            name: '玫瑰饰品',
-            desc: '鲜花玫瑰',
-            price: '4999.0',
-            path: '/ '
+          options: [{
+            title: '鲜花玫瑰',
+            details: [{
+              image: require('../assets/images/rose.jpg'),
+              name: '鲜花玫瑰',
+              desc: '真爱',
+              price: '1999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '鲜花玫瑰',
+              desc: '纯情',
+              price: '1999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '鲜花玫瑰',
+              desc: '致美',
+              price: '1999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '鲜花玫瑰',
+              desc: '浓烈',
+              price: '1999.0',
+              path: '/ '
+            }]
+          },{
+            title: '永生玫瑰',
+            details: [{
+              image: require('../assets/images/rose.jpg'),
+              name: '永生玫瑰',
+              desc: '完美',
+              price: '2999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '永生玫瑰',
+              desc: '简约',
+              price: '2999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '永生玫瑰',
+              desc: '向往',
+              price: '2999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '永生玫瑰',
+              desc: '永恒',
+              price: '2999.0',
+              path: '/ '
+            }]
+          },{
+            title: '玫瑰珠宝',
+            details: [{
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰珠宝',
+              desc: '意志',
+              price: '3999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰珠宝',
+              desc: '指引',
+              price: '3999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰珠宝',
+              desc: '远方',
+              price: '3999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰珠宝',
+              desc: '诗意',
+              price: '3999.0',
+              path: '/ '
+            }]
+          },{
+            title: '玫瑰饰品',
+            details: [{
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰饰品',
+              desc: '精致',
+              price: '4999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰饰品',
+              desc: '细腻',
+              price: '1999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰饰品',
+              desc: '清新',
+              price: '4999.0',
+              path: '/ '
+            }, {
+              image: require('../assets/images/rose.jpg'),
+              name: '玫瑰饰品',
+              desc: '闪耀',
+              price: '4999.0',
+              path: '/ '
+            }]
           }],
 
           option5: [{
@@ -347,6 +313,7 @@
     }
 
     span {
+      width: 100%;
       display: inline-block;
     }
   </style>
